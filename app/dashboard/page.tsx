@@ -5,7 +5,6 @@ import { Plus } from "lucide-react"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/components/columns"
 import { Button } from "@/components/ui/button"
-import { AddStudentDialog } from "@/components/add-student-dialog"
 
 const initialData = [
   {
@@ -63,19 +62,18 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Students List</h2>
-        <Button onClick={() => setIsDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Student
-        </Button>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto space-y-8 h-full">
+        <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-md">
+          <h2 className="text-3xl font-semibold text-gray-900">Students List</h2>
+          <Button onClick={() => setIsDialogOpen(true)} className="text-white bg-indigo-600 hover:bg-indigo-700 transition duration-200 ease-in-out flex items-center px-4 py-2 rounded-md">
+            Submit
+          </Button>
+        </div>
+        <div className="rounded-lg border bg-white shadow-sm overflow-hidden h-full">
+          <DataTable columns={columns} data={data} onDelete={deleteStudent} />
+        </div>
       </div>
-      <div className="rounded-md border">
-        <DataTable columns={columns} data={data} onDelete={deleteStudent} />
-      </div>
-      <AddStudentDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} onSubmit={addStudent} />
     </div>
   )
 }
-

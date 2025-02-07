@@ -107,6 +107,18 @@ export const columns: ColumnDef<Student>[] = [
     cell: ({ row }) => {
       const student = row.original
 
+      const handleEditDetails = () => {
+        // Implement logic for editing student details
+        console.log("Editing details of student:", student.id)
+      }
+
+      const handleDeleteStudent = () => {
+        // Implement logic for deleting student
+        if (confirm(`Are you sure you want to delete student ${student.name}?`)) {
+          console.log("Student deleted:", student.id)
+        }
+      }
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -117,17 +129,16 @@ export const columns: ColumnDef<Student>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(student.id)}>
-              Copy student ID
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View details</DropdownMenuItem>
-            <DropdownMenuItem>Edit details</DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive">Delete student</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleEditDetails}>
+              Edit details
+            </DropdownMenuItem>
+            <DropdownMenuItem className="text-destructive" onClick={handleDeleteStudent}>
+              Delete student
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
   },
 ]
-
